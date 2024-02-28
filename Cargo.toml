@@ -4,6 +4,3 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-hematite-nbt = "0.5.2"
-serde_json = "1.0.114"
-serde = { version = "1.0.197", features = ["derive"] }
