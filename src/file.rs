@@ -16,7 +16,7 @@ pub fn gen_mem() -> String
          if i != 0 { text = format!("{}\n", text); }
          text = format!("{}{}: ", text, form::address(i));
       }
-      text = format!("{}{} ", text, form::uint_to_mem(file[i]).0);
+      text = format!("{}{} ", text, form::uint_to_mem(file[i]).1);
    }
    return text;
 }
