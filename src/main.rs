@@ -1,44 +1,60 @@
-#[allow(dead_code)]
+mod file;
+mod form;
 
-use std::fs;
+use std::borrow::Cow;
+use eframe::{NativeOptions, run_native};
+use eframe::egui::{CentralPanel, CtxRef, FontDefinitions, FontFamily, ScrollArea, Vec2};
+use eframe::epi::{App, Frame, Storage};
 
-fn format_address(address: usize) -> String
+const WIDTH: f32 = 890.0;
+const HEIGHT: f32 = 1200.0;
+const FONT: &str = "JetBrainsMono";
+const H_FONT_SIZE: f32 = 30.0;
+const B_FONT_SIZE: f32 = 19.0;
+
+
+#[derive(Default)]
+struct Hex;
+
+impl Hex
 {
-    let mut address = format!("{:X}", address);
-    if address.len() < 8
-    {
-        for _i in 0..(8 - address.len())
-        {
-            address = format!("{}{}", 0, address);
-        }
-    }
-    return address;
+   fn new() -> Hex
+   {
+      return Hex::default();
+   }
+   fn font_config(&self, ctx: &CtxRef)
+   {
+      let mut font_def = FontDefinitions::default();
+      font_def.font_data.insert(FONT.to_string(), Cow::Borrowed(include_bytes!("../res/font/JetBrainsMono-Bold.ttf")));
+      font_def.family_and_size.insert(eframe::egui::TextStyle::Heading, (FontFamily::Proportional, H_FONT_SIZE), );
+      font_def.family_and_size.insert(eframe::egui::TextStyle::Body, (FontFamily::Proportional, B_FONT_SIZE), );
+      font_def.fonts_for_family.get_mut(&FontFamily::Proportional).unwrap().insert(0, FONT.to_string());
+      ctx.set_fonts(font_def);
+   }
 }
-
-fn uint_to_mem(byte: u8) -> (String,char)
+impl App for Hex
 {
-    let mut c = byte as char;
-    let mut hex = format!("{:X}", byte);
-    
-    if c == '\n' {c = 'n';}
-    if hex.len() == 1 {hex = format!("{}{}", 0, hex);}
-    return (hex,c);
+   fn setup(&mut self, ctx: &CtxRef, _frame: &mut Frame<'_>, _storage: Option<&dyn Storage>)
+   {
+      self.font_config(ctx);
+   }
+   fn update(&mut self, ctx: &CtxRef, _frame: &mut Frame<'_>)
+   {
+      CentralPanel::default().show(ctx, |ui|
+         {
+            ScrollArea::auto_sized().show(ui, |ui|
+            {
+               ui.label(file::gen_mem());
+            })
+         });
+   }
+   fn name(&self) -> &str { "Hex Editor" }
 }
-
 fn main()
 {
-    let path: &str = "mcs/test.txt";
-    let file: Vec<u8> = fs::read(path).unwrap();
-    
-    println!("ADDRESS   00 01 02 03 04 05 06 07   08 09 0A 0B 0C 0D 0E 0F");
-    for i in 0..file.len()
-    {
-        if i % 8 == 0 && i != 0 { print!("  "); }
-        if i % 16 == 0
-        {
-            if i != 0 { print!("\n"); }
-            print!("{}: ",format_address(i));
-        }
-        print!("{} ",uint_to_mem(file[i]).0);
-    }
+   let app = Hex::new();
+   let mut win_option = NativeOptions::default();
+   win_option.initial_window_size = Some(Vec2::new(HEIGHT, WIDTH));
+   win_option.resizable = false;
+   run_native(Box::new(app), win_option);
 }
