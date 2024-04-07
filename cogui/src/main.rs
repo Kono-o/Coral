@@ -1,7 +1,7 @@
+use std::path::PathBuf;
 use coren::*;
 
 fn main() {
-    println!("6 + 3 = {}", math::add(6, 4));
-    println!("5 - 2 = {}", math::sub(5, 2));
-    println!("3 x 3 = {}", math::mult(3, 3));
+  let p: PathBuf = PathBuf::from("./");
+  dbg!(packs::iter_packs(&p).unwrap());
 }
