@@ -6,14 +6,9 @@ version = 3
 name = "cogui"
 version = "0.1.0"
 dependencies = [
- "coren 0.1.0 (git+https://github.com/Kono-o/coral-renderer.git)",
+ "coren",
 ]
 
 [[package]]
 name = "coren"
 version = "0.1.0"
-
-[[package]]
-name = "coren"
-version = "0.1.0"
-source = "git+https://github.com/Kono-o/coral-renderer.git#2411b8e44e67c6d91903724c236b1e8034cb796c"
