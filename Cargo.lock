@@ -3,12 +3,12 @@
 version = 3
 
 [[package]]
-name = "coral-gui"
+name = "cogui"
 version = "0.1.0"
 dependencies = [
- "engine",
+ "coren",
 ]
 
 [[package]]
-name = "engine"
+name = "coren"
 version = "0.1.0"

@@ -1,7 +1,6 @@
 [package]
-name = "coral-gui"
+name = "coren"
 version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-engine = { path = "../renderer" }
