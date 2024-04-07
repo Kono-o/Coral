@@ -4,4 +4,4 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-coren = { path = "../coren" }
+coren = { git = "https://github.com/Kono-o/coral-renderer.git" }
