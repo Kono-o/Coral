@@ -6,10 +6,12 @@ fn main() {
     Ok(..) => (),
     Err(err) => println!("{:?}", err)
   }
+  println!("=====================");
   match packs::get_packs(&PathBuf::from("/home/kono/.minecraft/resourcepacks")) {
     Ok(..) => (),
     Err(err) => println!("{:?}", err)
   }
+  println!("=====================");
   match packs::get_packs(&PathBuf::from("/home/kono/.minecraft/resourcepaack")) {
     Ok(..) => (),
     Err(err) => println!("{:?}", err)
