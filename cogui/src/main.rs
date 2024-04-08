@@ -2,18 +2,12 @@ use std::path::PathBuf;
 use coren::*;
 
 fn main() {
-  match packs::get_packs(&PathBuf::from("/home/kono/.minecraft/resourcepack")) {
-    Ok(..) => (),
-    Err(err) => println!("{:?}", err)
-  }
-  println!("=====================");
   match packs::get_packs(&PathBuf::from("/home/kono/.minecraft/resourcepacks")) {
-    Ok(..) => (),
+    Ok(..) => println!("worked"),
     Err(err) => println!("{:?}", err)
   }
-  println!("=====================");
-  match packs::get_packs(&PathBuf::from("/home/kono/.minecraft/resourcepaack")) {
-    Ok(..) => (),
+  match packs::get_packs(&PathBuf::from("./res")) {
+    Ok(..) => println!("worked"),
     Err(err) => println!("{:?}", err)
   }
 }

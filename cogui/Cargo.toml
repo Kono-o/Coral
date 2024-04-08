@@ -5,4 +5,5 @@ edition = "2021"
 
 [dependencies]
 coren = { path = "../coren" }
-#coren = { git = "https://github.com/Kono-o/coral-renderer.git" } use this instead
+# use this instead when compiling from github
+#coren = { git = "https://github.com/Kono-o/coral-renderer.git" }
